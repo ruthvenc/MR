@@ -38,6 +38,9 @@ if (!artist || !album || !date || !image) {
     return;
 }
 
+
+};
+
 albumList.push({
     "artist":artist,
     "album": album,

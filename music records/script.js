@@ -49,9 +49,14 @@ function addAlbum() {
     let image = imageElement.files[0];
 
     if (!artist || !album || !date || !image) {
-        console.log("Neįvesti laukeliai");
+        alert("Neįvesti visi laukeliai");
         return;
     }
+
+    if (!isAlbumYear(date)) {
+        alert("Albumo metai įvesti neteisingai");
+        return;
+    };
 
     let record = {
         "artist": artist,
@@ -73,7 +78,11 @@ function addAlbum() {
     let albumsJSON = JSON.stringify(albumList);
     localStorage.setItem("albums", albumsJSON);
 
-    console.log("Duomenys:", artist, album, date, image);    
+    // Atnaujinkim albumų sąrašą
+    renderAlbums();
+    
+    // Išvalykim formą
+    clearForm();
 }
 
 function checkForDuplicates(record) {
@@ -85,6 +94,32 @@ function checkForDuplicates(record) {
     })
     return isDuplicate;
 };
+
+function isAlbumYear(year) {
+    let date = new Date();
+    let currentYear = date.getFullYear();
+
+    if (isFinite(year) && year <= currentYear && year > 1900) {
+        return true
+    } else {
+        return false;
+    }
+}
+
+let formElement = document.querySelector(".album-form");
+let clearButton = document.querySelector(".btn-clear-form");
+
+clearButton.addEventListener("click", clearForm);
+
+function clearForm() {
+    formElement.reset();
+
+    // arba
+    // artistElement.value = "";
+    // albumElement.value = "";
+    // releaseDateElement.value = "";
+    // imageElement.value = "";
+}
 
 
 function renderAlbums() {
@@ -111,7 +146,3 @@ function renderAlbums() {
 }
 
 renderAlbums();
-
-
-
-

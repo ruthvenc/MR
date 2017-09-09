@@ -32,7 +32,30 @@ let albumList = JSON.parse(albumsJSON);
 if (albumList === null) {
     albumList = [];
 }
+// get modal
+let modal = document.getElementById("modalWindow");
 
+//mugtukas kuris atidarys modal
+let btn = document.getElementById("openModal");
+
+// (x) kuris uždarys langą
+let span = document.getElementsByClassName("close")[0];
+
+//click open modal
+btn.onclick = function() {
+    modal.style.display = "block";
+};
+
+//isejimo mygtuko paspaudimas
+span.onclick = function() {
+    modal.style.display = "none";
+};
+// jeigu paspaudzia kazkur kitur
+window.onclick = function() {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+};
 
 // Formos elementai
 let artistElement = document.querySelector("#artist");

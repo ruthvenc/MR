@@ -26,36 +26,38 @@ addAlbumButton.addEventListener("click", addAlbum);
 
 
 // Gauname albumus iš localStorage ir sukuriame objektą
-let albumsJSON = localStorage.getItem("albums");
-let albumList = JSON.parse(albumsJSON);
+// let albumsJSON = localStorage.getItem("albums");
 
-if (albumList === null) {
-    albumList = [];
+//gauname albumus is json-server
+let httpRequest = new XMLHttpRequest();
+
+if (!httpRequest) {
+    alert("Naršyklė nepalaiko AJAX");
+}   else {
+    httpRequest.onreadystatechange = processAlbumJson;
+    httpRequest.open ('GET', 'http://localhost:3000/albums');
+    httpRequest.send();
 }
-// get modal
-let modal = document.getElementById("modalWindow");
 
-//mugtukas kuris atidarys modal
-let btn = document.getElementById("openModal");
 
-// (x) kuris uždarys langą
-let span = document.getElementsByClassName("close")[0];
+//kai gauname albumus is json serverio
+function processAlbumJson() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200){
+            let albumsJSON = httpRequest.responseText;
+            let albumList = JSON.parse(albumsJSON);
+            //patikrinam ar sekmingai pavyko ikelti
+            if (albumList === null) {
+                albumList = [];
+            }
 
-//click open modal
-btn.onclick = function() {
-    modal.style.display = "block";
-};
-
-//isejimo mygtuko paspaudimas
-span.onclick = function() {
-    modal.style.display = "none";
-};
-// jeigu paspaudzia kazkur kitur
-window.onclick = function() {
-    if (event.target == modal) {
-        modal.style.display = "none";
+            //spausdinam albumus
+            renderAlbums(albumList);
+        } else {
+            alert("Klaida. Negavau duomenų iš serverio");
+        }
     }
-};
+}
 
 // Formos elementai
 let artistElement = document.querySelector("#artist");
@@ -145,7 +147,7 @@ function clearForm() {
 }
 
 
-function renderAlbums() {
+function renderAlbums(albumList) {
     // Patikrinti ar yra išsaugotų albumų
     // Jei nėra - nutraukti funkcijos vykdymą
     if (!albumList) return;
@@ -168,4 +170,3 @@ function renderAlbums() {
     albumListElement.innerHTML = result;
 }
 
-renderAlbums();

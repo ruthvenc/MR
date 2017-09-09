@@ -1,0 +1,10 @@
+{
+    "albums": [
+        {
+            "id": 1,
+            "artist": "Coldplay",
+            "album": "Ghost Stories",
+            "date": "2014",
+            "image": "R-6736232-1425586901-2852.jpeg.jpg"
+        }]
+}

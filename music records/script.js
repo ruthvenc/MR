@@ -24,6 +24,9 @@ let addAlbumButton = document.querySelector(".btn-save-album");
 // Kai paspaudžiamas mygtukas, vykdyk addAlbum funkciją
 addAlbumButton.addEventListener("click", addAlbum);
 
+//Čia saugosim visus albumus
+
+let allAlbmus = []
 
 // Gauname albumus iš localStorage ir sukuriame objektą
 // let albumsJSON = localStorage.getItem("albums");
@@ -52,6 +55,7 @@ function processAlbumJson() {
             }
 
             //spausdinam albumus
+            allAlbums = albumList;
             renderAlbums(albumList);
         } else {
             alert("Klaida. Negavau duomenų iš serverio");
@@ -91,20 +95,48 @@ function addAlbum() {
     }
 
     // Patikrinime ar albumas jau buvo įvestas
-    if (checkForDuplicates(record)){
-        alert("Toks albumas jau išsaugotas");
-        return;
+    // if (checkForDuplicates(record)){
+    //     alert("Toks albumas jau išsaugotas");
+    //     return;
+    // }
+
+    // Saugome albumą i lokal storage
+    // albumList.push(record);
+
+    // // Išsaugoti duomenis į localStorage
+    // let albumsJSON = JSON.stringify(albumList);
+    // localStorage.setItem("albums", albumsJSON);
+
+    // Siunčiame albumo duomenis į serverį
+    let httpRequest = new XMLHttpRequest();
+    
+    if (!httpRequest) {
+        alert("Naršyklė nepalaiko AJAX");
+    }   else {
+        httpRequest.onreadystatechange = saveAlbumToServer;
+        httpRequest.open ('POST', 'http://localhost:3000/albums');
+        httpRequest.open('POST', 'http://localhost:3000/albums');
+        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        httpRequest.send("artist=" + record.artist + "&album=" + record.album + "&date=" + record.date + "&image=" + record.image);
+
+    }
+    function saveAlbumToServer() {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 201) {
+                console.log("Išsaugojau sėkmingai");
+                
+               // Spausdinam albumus
+                allAlbums.push(record);
+                renderAlbums(allAlbums);
+            } else {
+                alert("Negaliu išsaugoti serverio");
+            }
+        }
     }
 
-    // Saugome albumą
-    albumList.push(record);
-
-    // Išsaugoti duomenis į localStorage
-    let albumsJSON = JSON.stringify(albumList);
-    localStorage.setItem("albums", albumsJSON);
 
     // Atnaujinkim albumų sąrašą
-    renderAlbums();
+    // renderAlbums();
     
     // Išvalykim formą
     clearForm();

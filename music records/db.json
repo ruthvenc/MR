@@ -1,10 +1,18 @@
 {
-    "albums": [
-        {
-            "id": 1,
-            "artist": "Coldplay",
-            "album": "Ghost Stories",
-            "date": "2014",
-            "image": "R-6736232-1425586901-2852.jpeg.jpg"
-        }]
+  "albums": [
+    {
+      "id": 1,
+      "artist": "Coldplay",
+      "album": "Ghost Stories",
+      "date": "2014",
+      "image": "R-6736232-1425586901-2852.jpeg.jpg"
+    },
+    {
+      "artist": "dsjkfh",
+      "album": "sdf",
+      "date": "1999",
+      "image": "R-4867259-1377953337-9246.jpeg.jpg",
+      "id": 2
+    }
+  ]
 }

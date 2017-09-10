@@ -66,18 +66,22 @@ function processAlbumJson() {
 // Formos elementai
 let artistElement = document.querySelector("#artist");
 let albumElement = document.querySelector("#album");
+let genreElement = document.querySelector("#genre");
 let releaseDateElement = document.querySelector("#releaseDate");
 let imageElement = document.querySelector("#image");
+
 
 
 function addAlbum() {
     // nuskaitome laukelių reikšmes
     let artist = artistElement.value;
     let album = albumElement.value;
+    let genre = genreElement.value;
     let date = releaseDateElement.value;
     let image = imageElement.files[0];
+    
 
-    if (!artist || !album || !date || !image) {
+    if (!artist || !album || !genre || !date || !image) {
         alert("Neįvesti visi laukeliai");
         return;
     }
@@ -90,6 +94,7 @@ function addAlbum() {
     let record = {
         "artist": artist,
         "album": album,
+        "genre": genre,
         "date": date,
         "image": image.name
     }
@@ -117,7 +122,7 @@ function addAlbum() {
         httpRequest.open ('POST', 'http://localhost:3000/albums');
         httpRequest.open('POST', 'http://localhost:3000/albums');
         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        httpRequest.send("artist=" + record.artist + "&album=" + record.album + "&date=" + record.date + "&image=" + record.image);
+        httpRequest.send("artist=" + record.artist + "&album=" + record.album + "&genre=" + record.genre + "&date=" + record.date  + "&image=" + record.image);
 
     }
     function saveAlbumToServer() {
@@ -191,6 +196,7 @@ function renderAlbums(albumList) {
             <div class="album clearfix">
                 <img src="img/${album.image}" alt="${album.artist} - ${album.album}">
                 <h2>${album.album}<span>${album.artist}</span></h2>
+                <span class="badge badge-pill badge-info">${album.genre}</span>
                 <date>${album.date}</date>
             </div>
             <hr>

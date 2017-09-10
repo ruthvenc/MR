@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    
+
     <header>
         <div class="container">
             <h1 class="main-title">Mano albumai</h1>
@@ -33,17 +33,26 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="image" class="col-sm-2 control-label">Žanras</label>
+                <div class="col">
+                    <input type="text" class="form-control" id="genre">
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="releaseDate" class="col-sm-2 control-label">Metai</label>
                 <div class="col">
                     <input type="number" class="form-control" id="releaseDate">
                 </div>
             </div>
+   
             <div class="form-group row">
                 <label for="image" class="col-sm-2 control-label">Paveiksliukas</label>
                 <div class="col">
                     <input type="file" class="form-control" id="image">
                 </div>
             </div>
+
+
             <!-- <button type="button" class="btn btn-primary" onclick="addAlbum()">Pridėti</button> -->
             <button type="button" class="btn btn-primary btn-save-album">Pridėti</button>
             <button type="button" class="btn btn-primary btn-clear-form">Išvalyti</button>
@@ -52,7 +61,7 @@
         <hr>
 
         <div class="album-list">
-            
+
         </div>
 
     </section>
@@ -61,7 +70,7 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
- 
+
     <script src="script.js"></script>
 </body>
 

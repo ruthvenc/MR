@@ -24,64 +24,64 @@ let addAlbumButton = document.querySelector(".btn-save-album");
 // Kai paspaudžiamas mygtukas, vykdyk addAlbum funkciją
 addAlbumButton.addEventListener("click", addAlbum);
 
-//Čia saugosim visus albumus
 
-let allAlbmus = []
+
+// Čia saugosim visus albumus
+let allAlbums = [];
+
 
 // Gauname albumus iš localStorage ir sukuriame objektą
 // let albumsJSON = localStorage.getItem("albums");
 
-//gauname albumus is json-server
+// Gausime albumus iš json-server
 let httpRequest = new XMLHttpRequest();
 
 if (!httpRequest) {
     alert("Naršyklė nepalaiko AJAX");
-}   else {
+} else {
     httpRequest.onreadystatechange = processAlbumJson;
-    httpRequest.open ('GET', 'http://localhost:3000/albums');
+    httpRequest.open('GET', 'http://localhost:3000/albums');
     httpRequest.send();
 }
 
-
-//kai gauname albumus is json serverio
+// Kai gauname albumus iš json-server
 function processAlbumJson() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        if (httpRequest.status === 200){
+        if (httpRequest.status === 200) {
             let albumsJSON = httpRequest.responseText;
             let albumList = JSON.parse(albumsJSON);
-            //patikrinam ar sekmingai pavyko ikelti
+
+            // Patikrinam ar sėkmingai pavyko sukurti naują objektą
             if (albumList === null) {
                 albumList = [];
             }
-
-            //spausdinam albumus
+            
+            // Spausdinam albumus
             allAlbums = albumList;
             renderAlbums(albumList);
+
         } else {
             alert("Klaida. Negavau duomenų iš serverio");
         }
     }
 }
 
+
 // Formos elementai
 let artistElement = document.querySelector("#artist");
 let albumElement = document.querySelector("#album");
-let genreElement = document.querySelector("#genre");
 let releaseDateElement = document.querySelector("#releaseDate");
 let imageElement = document.querySelector("#image");
-
 
 
 function addAlbum() {
     // nuskaitome laukelių reikšmes
     let artist = artistElement.value;
     let album = albumElement.value;
-    let genre = genreElement.value;
     let date = releaseDateElement.value;
     let image = imageElement.files[0];
-    
 
-    if (!artist || !album || !genre || !date || !image) {
+    if (!artist || !album || !date || !image) {
         alert("Neįvesti visi laukeliai");
         return;
     }
@@ -94,7 +94,6 @@ function addAlbum() {
     let record = {
         "artist": artist,
         "album": album,
-        "genre": genre,
         "date": date,
         "image": image.name
     }
@@ -105,10 +104,10 @@ function addAlbum() {
     //     return;
     // }
 
-    // Saugome albumą i lokal storage
+    // Saugome albumą
     // albumList.push(record);
 
-    // // Išsaugoti duomenis į localStorage
+    // Išsaugoti duomenis į localStorage
     // let albumsJSON = JSON.stringify(albumList);
     // localStorage.setItem("albums", albumsJSON);
 
@@ -117,20 +116,19 @@ function addAlbum() {
     
     if (!httpRequest) {
         alert("Naršyklė nepalaiko AJAX");
-    }   else {
+    } else {
         httpRequest.onreadystatechange = saveAlbumToServer;
-        httpRequest.open ('POST', 'http://localhost:3000/albums');
         httpRequest.open('POST', 'http://localhost:3000/albums');
         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        httpRequest.send("artist=" + record.artist + "&album=" + record.album + "&genre=" + record.genre + "&date=" + record.date  + "&image=" + record.image);
-
+        httpRequest.send("artist=" + record.artist + "&album=" + record.album + "&date=" + record.date + "&image=" + record.image);
     }
+
     function saveAlbumToServer() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 201) {
                 console.log("Išsaugojau sėkmingai");
                 
-               // Spausdinam albumus
+                // Spausdinam albumus
                 allAlbums.push(record);
                 renderAlbums(allAlbums);
             } else {
@@ -183,7 +181,6 @@ function clearForm() {
     // imageElement.value = "";
 }
 
-
 function renderAlbums(albumList) {
     // Patikrinti ar yra išsaugotų albumų
     // Jei nėra - nutraukti funkcijos vykdymą
@@ -196,7 +193,8 @@ function renderAlbums(albumList) {
             <div class="album clearfix">
                 <img src="img/${album.image}" alt="${album.artist} - ${album.album}">
                 <h2>${album.album}<span>${album.artist}</span></h2>
-                <span class="badge badge-pill badge-info">${album.genre}</span>
+                <span class="badge badge-pill badge-info">Electronic</span>
+                <span class="badge badge-pill badge-info">Hip Hop</span><br>
                 <date>${album.date}</date>
             </div>
             <hr>
@@ -207,4 +205,3 @@ function renderAlbums(albumList) {
     let albumListElement = document.querySelector(".album-list");
     albumListElement.innerHTML = result;
 }
-

@@ -2,18 +2,68 @@
   "albums": [
     {
       "id": 1,
-      "artist": "Coldplay",
-      "album": "Ghost Stories",
-      "date": "2014",
-      "image": "R-6736232-1425586901-2852.jpeg.jpg"
+      "artist": "Benjamin Clementine",
+      "album": "Cornerstone",
+      "date": "2013",
+      "image": "R-5165503-1386275991-7849.jpeg.jpg",
+      "genre": "Jazz, Folk, World, Country"
     },
     {
-      "artist": "Gregory Porter",
-      "album": "Liquid Spirit",
-      "genre": "Jazz",
-      "date": "2014",
-      "image": "R-4867259-1377953337-9246.jpeg.jpg",
-      "id": 2
+      "artist": "Chemical Brothers",
+      "album": "Push the button",
+      "date": "2004",
+      "image": "R-365109-1390519203-2623.jpeg.jpg",
+      "id": 2,
+      "genre": "Pop Rap, Downtempo, Big Beat, Tech House"
+    },
+    {
+      "artist": "Massive Attack",
+      "album": "Ritual Spirit",
+      "date": "2016",
+      "image": "R-8172128-1456499812-1146.jpeg.jpg",
+      "genre": "Trip Hop",
+      "id": 3
+    },
+    {
+      "artist": "Massive Attack",
+      "album": "Heligoland",
+      "date": "2016",
+      "image": "R-2124924-1265382089.jpeg.jpg",
+      "genre": "Trip Hop, Electronic",
+      "id": 4
+    },
+    {
+      "artist": "Kendrick Lamar",
+      "album": "DAMN",
+      "date": "2017",
+      "image": "R-10133538-1492204963-3196.jpeg.jpg",
+      "genre": "Hip Hop",
+      "id": 5
+    },
+    {
+      "artist": "Gas",
+      "album": "Narkopop",
+      "date": "2017",
+      "image": "R-10167583-1492796469-7701.jpeg.jpg",
+      "genre": "Modern Classical, Techno, Ambient",
+      "id": 6
+    },
+    {
+      "artist": "Bonobo",
+      "album": "Migration",
+      "date": "2017",
+      "image": "R-9642921-1484211766-8755.jpeg.jpg",
+      "genre": "Downtempo, House",
+      "id": 7
+    },
+    {
+      "artist": "Jon Hopkins",
+      "album": "Collider",
+      "date": "2013",
+      "image": "R-5424661-1393019986-4073.jpeg.jpg",
+      "genre": "Electronic, Techno",
+      "id": 8
     }
+    
   ]
 }
